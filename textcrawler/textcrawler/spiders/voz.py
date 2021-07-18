@@ -1,6 +1,5 @@
 import scrapy
 
-
 class VozSpider(scrapy.Spider):
     name = 'voz'
     start_urls = ['https://voz.vn/f/chuyen-tro-linh-tinh.17/']
@@ -11,7 +10,7 @@ class VozSpider(scrapy.Spider):
     def parse(self, response):
         print("Current URL: {}".format(response.url))
 
-        if "https://voz.vn/f/chuyen-tro-linh-tinh.17/page-3" in response.url:
+        if "https://voz.vn/f/chuyen-tro-linh-tinh.17/page-2" in response.url:
             return
 
         post_urls = response.xpath('//div[@class="structItem-title"]//a/@href').extract()
@@ -27,7 +26,7 @@ class VozSpider(scrapy.Spider):
         yield {
                 'url': response.url,
                 'title': response.xpath('//h1[contains(@class, "p-title-value")]/text()').get().strip(),
-                'text': ' '.join(response.xpath('//div[contains(@class, "bbWrapper")]//text()').extract()).strip(),
+                'text': '[_SEP_]'.join(response.xpath('//article[@class="message-body js-selectToQuote"]//div[contains(@class, "bbWrapper")]/text()[not(ancestor::blockquote)]').extract()).strip(),
             }
 
         next_page = response.xpath('//a[contains(@class, "pageNav-jump--next")]//@href').get()
