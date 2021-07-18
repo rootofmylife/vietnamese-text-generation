@@ -12,6 +12,7 @@ BOT_NAME = 'textcrawler'
 SPIDER_MODULES = ['textcrawler.spiders']
 NEWSPIDER_MODULE = 'textcrawler.spiders'
 
+LOG_LEVEL = 'INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'textcrawler (+http://www.yourdomain.com)'
